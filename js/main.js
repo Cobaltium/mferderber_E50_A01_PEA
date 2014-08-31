@@ -1,48 +1,58 @@
 $(document).ready(function() {
 	var filename = window.location.hash.substring(1);
-	if(filename == ""){
-	$(".main-content").load("content/introduction.html #content");
-} else {
-	$(".main-content").load("content/" + filename +".html #content");
-}
 
-	$(".main-content").css('display', "block");
-	$(document).css('height', '100%');
-	$(".main-content").css('top', '100%');
-	$(".main-content").animate({
-		top: '0'
-	}, 300, function() {
+	$('.main-content').css('display', 'none');
 
-		$(document).css('height', 'auto');
-	});
+	if (filename == "") {
+		$("#newContent").load("content/introduction.html #content", null, loadContent);
+	} else {
+		$("#newContent").load("content/" + filename + ".html #content",null, loadContent);
+	}
+
 	$("ul li a").click(function(e) {
 
 		var filename = $(this).attr('href').substring(1) + ".html";
-		animate(filename);
+		$("#newContent").load("content/" + filename + " #content", null, loadContent);
 	});
 
 });
 
-function animate(filename) {
-	if ($(document).width() > 1024) {
-		$(".main-content").animate({
-			top: '-150%'
-		}, 300, function() {
-			$(".main-content").load("content/" + filename + " #content");
-			$(".main-content").css('display', "none");
-			$(".main-content").css('top', '100%');
-			$(".main-content").css('display', "inline-block");
-			$(document).css('height', '100%');
-			$(".main-content").animate({
-				top: '0'
-			}, 300, function() {
-				$(document).css('height', 'auto');
-				// $(".main-content").animate({
-				// 	'boxShadow': "10px 10px 10px rgb(200,200,200)"
-				// }, 300);
-			});
-		});
+function loadContent() {
+	if (isDesktop()) {
+		animate();
 	} else {
-		$(".main-content").load("content/" + filename + " #content");
+		$('.main-content').css('display', 'block');
+		$('.main-content').html($('#newContent').html());
+
 	}
+}
+
+function isDesktop() {
+
+	if ($(document).width() > 1024) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function animate() {
+	$(".main-content").animate({
+		top: '-150%'
+	}, 300, function() {
+		$('.main-content').css('display', 'none');
+		$('.main-content').html($('#newContent').html());
+		$('.main-content').css('top', '100%');
+		$('.main-content').css('display', "inline-block");
+		scrollPaneBack();
+	});
+}
+
+function scrollPaneBack() {
+	$(document).css('height', '100%');
+	$(".main-content").animate({
+		top: '0'
+	}, 300, function() {
+		$(document).css('height', 'auto');
+	});
 }
