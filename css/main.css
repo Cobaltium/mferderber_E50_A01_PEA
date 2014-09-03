@@ -73,6 +73,8 @@ body {
 
 		padding: 30px;
 
+		padding-top: 15px;
+
 		text-align: left;
 
 		background-color: rgb(250, 250, 250);
@@ -99,9 +101,11 @@ nav {
 
 		margin: 0;
 
-		background-color: rgba(250, 250, 250, 0.8);
+		background-color: rgba(250, 250, 250, 0.9);
 
-		box-shadow: 4px 4px 2px rgb(200, 200, 200);
+		border-bottom: 1px solid rgba(160, 160, 160, 0.8);
+
+		box-shadow: 2px 3px 2px rgb(160, 160, 160);
 
 }
 
@@ -110,6 +114,16 @@ nav div {
 		padding-top: 6px;
 
 		padding-right: 10px;
+
+}
+
+nav span {
+
+		height: 100%;
+
+		width: 80%;
+
+		margin: auto;
 
 }
 
@@ -159,7 +173,9 @@ h1 {
 
 h2 {
 
-		padding-bottom: 5px;
+		margin-top: 0px;
+
+		margin-bottom: 0px;
 
 }
 
@@ -169,9 +185,9 @@ h3 {
 
 		padding-left: 10px;
 
-		padding-top: 5px;
+		padding-top: 2px;
 
-		padding-bottom: 5px;
+		padding-bottom: 2px;
 
 }
 
@@ -231,13 +247,13 @@ p {
 
 footer {
 
-		z-index: 1;
+		z-index: -1;
 
-		position: absolute;
+		position: fixed;
 
-		bottom: 0;
+		top: 95%;
 
-		height: 40px;
+		/*bottom: 0;*/
 
 		width: 100%;
 
