@@ -25,6 +25,9 @@ function loadContent() {
 		$('.main-content').html($('#newContent').html());
 
 	}
+	$('body').css('height', '100%');
+	$('.container').css('height', '100%');
+	$('.content').css('height', '95%');
 }
 
 function isDesktop() {
