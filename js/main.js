@@ -2,17 +2,12 @@ $(document).ready(function() {
   var filename = window.location.hash.substring(1);
 
   $('.main-content').css('display', 'none');
-
-  if (filename == "") {
-    $("#newContent").load("content/introduction.html #content", null, loadContent);
-  } else {
-    $("#newContent").load("content/" + filename + ".html #content", null, loadContent);
-  }
+  loadPage(filename);
 
   $("ul li a").click(function(e) {
 
-    var filename = $(this).attr('href').substring(1) + ".html";
-    $("#newContent").load("content/" + filename + " #content", null, loadContent);
+    var filename = $(this).attr('href').substring(1);
+    loadPage(filename);
   });
 
 });
@@ -26,7 +21,26 @@ function loadContent() {
 
   }
 }
+function loadPage(filename){
 
+  if (filename == "") {
+    filename = "introduction";
+  }
+   $.ajax({
+            url: "content/" + filename + ".html",
+            type: "GET",
+            crossDomain: true,
+            success: function (response) {
+              var content = $(response)[1];
+                $("#newContent").html(content.innerHTML);
+                loadContent();
+                document.title = "Program Exit Assesment - " + $(content).find('h2')[0].innerHTML;
+            },
+            error: function (xhr, status) {
+              console.log( "Triggered ajaxError handler." );
+            }
+        });
+}
 function isDesktop() {
 
   if ($(document).width() > 1024) {
